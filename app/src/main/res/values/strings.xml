@@ -3,4 +3,5 @@
     <string name="location_icon">Location icon</string>
     <string name="longitude">Longitude:</string>
     <string name="latitude">Latitude:</string>
+    <string name="search_for_cities">Search for cities</string>
 </resources>

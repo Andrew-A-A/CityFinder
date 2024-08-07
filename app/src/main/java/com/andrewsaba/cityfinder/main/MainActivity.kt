@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-       // this.window.statusBarColor=getColor(R.color.purple4_5)
+
         //View model initalization
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 

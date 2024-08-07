@@ -14,7 +14,9 @@ import kotlinx.coroutines.launch
 class MainViewModel(application: Application):AndroidViewModel(application) {
     //Check if cities list is loaded
      var isDataLoaded=false
+     var isAdapterInitialized=false
 
+    private lateinit var citiesListAdapter: CitiesListAdapter
 
     //String entered by user to search for cities
     val searchString=""
@@ -39,8 +41,12 @@ class MainViewModel(application: Application):AndroidViewModel(application) {
 
     //Return cities list adapter
     fun getCitiesListAdapter(): CitiesListAdapter {
-        initializeTrie(_cities)
-        return CitiesListAdapter(_cities)
+        if (!isAdapterInitialized) {
+            initializeTrie(_cities)
+            citiesListAdapter = CitiesListAdapter(_cities)
+            isAdapterInitialized=true
+        }
+        return citiesListAdapter
     }
 
     // Initialize trie with cities list (asynchronously)

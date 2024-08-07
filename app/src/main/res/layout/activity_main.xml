@@ -11,16 +11,26 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:background="@drawable/title_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:titleMarginStart="25dp"
         app:title="City Finder"
         app:titleTextColor="@color/white">
 
     </androidx.appcompat.widget.Toolbar>
+
+    <com.andrewsaba.cityfinder.custom.SearchView
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:paddingHorizontal="@dimen/city_item_padding"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="@id/toolbar"
+        app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/citiesList"
