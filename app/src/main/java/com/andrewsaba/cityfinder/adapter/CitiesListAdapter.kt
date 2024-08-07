@@ -8,19 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.andrewsaba.cityfinder.R
 import com.andrewsaba.cityfinder.model.City
 
-class CitiesListAdapter(private val cities: MutableList<City>):
-RecyclerView.Adapter<CitiesListAdapter.ViewHolder>() {
-
-    class ViewHolder(private val view: View): RecyclerView.ViewHolder(view) {
-        private val cityName: TextView =view.findViewById(R.id.city_name)
-        private val longitude: TextView =view.findViewById(R.id.long_val)
-        private val latitude: TextView =view.findViewById(R.id.lat_val)
-        fun bind(city: City){
-            cityName.text=city.name
-            longitude.text=city.coord.lon.toString()
-            latitude.text=city.coord.lat.toString()
-        }
-    }
+class CitiesListAdapter(private val cities: List<City>):
+RecyclerView.Adapter<CitiesListAdapter.Companion.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view=LayoutInflater.from(parent.context).inflate(R.layout.city_item,parent,false)
@@ -33,5 +22,20 @@ RecyclerView.Adapter<CitiesListAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(cities[position])
+    }
+
+    companion object {
+        class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+            private val cityName: TextView =view.findViewById(R.id.city_name)
+            private val longitude: TextView =view.findViewById(R.id.long_val)
+            private val latitude: TextView =view.findViewById(R.id.lat_val)
+
+            //Bind data to views
+            fun bind(city: City){
+                cityName.text=city.name
+                longitude.text=city.coord.lon.toString()
+                latitude.text=city.coord.lat.toString()
+            }
+        }
     }
 }
