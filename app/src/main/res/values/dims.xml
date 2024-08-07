@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <dimen name="city_item_padding">20dp</dimen>"
+    <dimen name="city_item_height">60dp</dimen>
+    <dimen name="list_space">10dp</dimen>
+    <dimen name="list_margin">50dp</dimen>
+    <dimen name="list_item_round">20dp</dimen>
+</resources>

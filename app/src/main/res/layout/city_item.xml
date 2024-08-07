@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/city_item_height"
+    android:background="@drawable/item_background"
+    android:layout_marginVertical="@dimen/list_space"
+    android:layout_marginHorizontal="@dimen/city_item_padding"
+    android:paddingHorizontal="@dimen/city_item_padding">
+
+    <TextView
+        android:id="@+id/city_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Los Angelos, USA" />
+
+    <ImageView
+        android:id="@+id/map_icon"
+        android:layout_width="39dp"
+        android:layout_height="40dp"
+        android:contentDescription="@string/location_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.117"
+        app:layout_constraintStart_toEndOf="@+id/city_name"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/location_pin" />
+
+    <TextView
+        android:id="@+id/long_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.205"
+        app:layout_constraintStart_toEndOf="@+id/map_icon"
+        app:layout_constraintTop_toTopOf="@+id/map_icon"
+        android:text="@string/longitude" />
+
+    <TextView
+        android:id="@+id/lat_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/map_icon"
+        app:layout_constraintEnd_toEndOf="@+id/long_text"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/long_text"
+        android:text="@string/latitude" />
+
+    <TextView
+        android:id="@+id/long_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="-66.513786"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/long_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/long_text"
+        app:layout_constraintTop_toTopOf="@+id/long_text" />
+
+    <TextView
+        android:id="@+id/lat_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="16.33333"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/long_val"
+        app:layout_constraintHorizontal_bias="0.188"
+        app:layout_constraintStart_toStartOf="@+id/long_val"
+        app:layout_constraintTop_toTopOf="@+id/lat_text" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
