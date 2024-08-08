@@ -1,13 +1,17 @@
 package com.andrewsaba.cityfinder.adapter
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.andrewsaba.cityfinder.R
 import com.andrewsaba.cityfinder.model.City
 import java.util.Locale
+
 
 class CitiesListAdapter(private val cities: List<City>):
 RecyclerView.Adapter<CitiesListAdapter.Companion.ViewHolder>() {
@@ -27,14 +31,16 @@ RecyclerView.Adapter<CitiesListAdapter.Companion.ViewHolder>() {
     }
 
     companion object {
-        class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+        class ViewHolder(private val view: View): RecyclerView.ViewHolder(view) {
+            //Get view widgets
             private val cityName: TextView =view.findViewById(R.id.city_name)
             private val longitude: TextView =view.findViewById(R.id.long_val)
             private val latitude: TextView =view.findViewById(R.id.lat_val)
+
             //Bind data to views
             fun bind(city: City){
                 var displayName= city.name.replaceFirstChar {
-                    if (it.isLowerCase()) it.titlecase(
+                    if (it.isLowerCase()) it.titlecase( //Make sure city name is capitalized
                         Locale.getDefault()
                     ) else it.toString()
                 }
@@ -42,6 +48,18 @@ RecyclerView.Adapter<CitiesListAdapter.Companion.ViewHolder>() {
                 cityName.text = displayName
                 longitude.text=city.coord.lon.toString()
                 latitude.text=city.coord.lat.toString()
+
+                view.setOnClickListener{
+                    openMaps(city)  //Set item click listener to open maps using city coordinates
+                }
+            }
+
+            private fun openMaps(city: City) {
+                val intent = Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://www.google.com/maps/search/?api=1&query=${city.coord.lat}%2C${city.coord.lon}")
+                )
+                startActivity(this.view.context, intent, null)
             }
         }
     }

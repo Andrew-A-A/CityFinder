@@ -28,7 +28,7 @@ class MainViewModel(private val application: Application):AndroidViewModel(appli
     //Trie (prefix tree) object
     private val _trie =  Trie()
 
-    //Return cities list adapter
+    //Return cities recycler view adapter
     fun getCitiesListAdapter(): CitiesListAdapter {
         if (!isAdapterInitialized) {
             var cities = mutableListOf<City>()
