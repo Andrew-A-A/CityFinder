@@ -51,6 +51,7 @@
             android:inputType="text"
             android:textColor="@color/purple5"
             android:singleLine="true"
+            android:textColorHint="@color/grey"
             android:autofillHints="false"
             android:hint="@string/search_for_cities"
             android:layout_toStartOf="@id/execute_search_button"
