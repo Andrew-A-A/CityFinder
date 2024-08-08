@@ -17,7 +17,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleMarginStart="25dp"
+        app:titleMarginStart="30dp"
         app:title="City Finder"
         app:titleTextColor="@color/white">
 
