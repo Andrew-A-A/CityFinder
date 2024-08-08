@@ -21,7 +21,7 @@ class SearchView(context: Context, attrs: AttributeSet) : FrameLayout(context, a
         binding.openSearchButton.setOnClickListener { openSearch() }
         binding.closeSearchButton.setOnClickListener { closeSearch() }
         binding.executeSearchButton.setOnClickListener{executeSearch()}
-        binding.searchInputText.setOnEditorActionListener {view, actionId, keyEvent ->
+        binding.searchInputText.setOnEditorActionListener { _, actionId, keyEvent ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE ||
                 keyEvent == null ||
                 keyEvent.keyCode == KeyEvent.KEYCODE_ENTER) {
@@ -34,7 +34,7 @@ class SearchView(context: Context, attrs: AttributeSet) : FrameLayout(context, a
     private fun executeSearch() {
         dismissKeyboard(binding.searchInputText)
         val searchString=binding.searchInputText.text.toString()
-        closeSearch()
+        collapseSearch()
         binding.searchInputText.setText(searchString)
     }
 
@@ -53,7 +53,7 @@ class SearchView(context: Context, attrs: AttributeSet) : FrameLayout(context, a
 
 
     private fun openSearch() {
-        binding.searchInputText.text.clear()
+        //binding.searchInputText.text.clear()
         binding.searchOpenView.visibility = View.VISIBLE
         val circularReveal = ViewAnimationUtils.createCircularReveal(
             binding.searchOpenView,
@@ -69,11 +69,16 @@ class SearchView(context: Context, attrs: AttributeSet) : FrameLayout(context, a
 
 
     private fun closeSearch() {
+        collapseSearch()
+        binding.searchInputText.text.clear()
+    }
+
+    private fun collapseSearch() {
         dismissKeyboard(binding.searchInputText)
         val circularConceal = ViewAnimationUtils.createCircularReveal(
             binding.searchOpenView,
-            (  binding.openSearchButton.right +   binding.openSearchButton.left) / 2,
-            (  binding.openSearchButton.top +   binding.openSearchButton.bottom) / 2,
+            (binding.openSearchButton.right + binding.openSearchButton.left) / 2,
+            (binding.openSearchButton.top + binding.openSearchButton.bottom) / 2,
             width.toFloat(), 0f
         )
 
@@ -84,11 +89,10 @@ class SearchView(context: Context, attrs: AttributeSet) : FrameLayout(context, a
             override fun onAnimationCancel(animation: Animator) = Unit
             override fun onAnimationStart(animation: Animator) = Unit
             override fun onAnimationEnd(animation: Animator) {
-                binding.searchOpenView.visibility = View.INVISIBLE
-                binding.searchInputText.text.clear()
+                binding.searchOpenView.visibility = INVISIBLE
+
                 circularConceal.removeAllListeners()
             }
         })
     }
-
 }

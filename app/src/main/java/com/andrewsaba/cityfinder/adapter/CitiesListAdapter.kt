@@ -7,12 +7,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.andrewsaba.cityfinder.R
 import com.andrewsaba.cityfinder.model.City
+import java.util.Locale
 
 class CitiesListAdapter(private val cities: List<City>):
 RecyclerView.Adapter<CitiesListAdapter.Companion.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view=LayoutInflater.from(parent.context).inflate(R.layout.city_item,parent,false)
+
         return  ViewHolder(view)
     }
 
@@ -32,7 +34,13 @@ RecyclerView.Adapter<CitiesListAdapter.Companion.ViewHolder>() {
 
             //Bind data to views
             fun bind(city: City){
-                cityName.text=city.name
+                var displayName= city.name.replaceFirstChar {
+                    if (it.isLowerCase()) it.titlecase(
+                        Locale.getDefault()
+                    ) else it.toString()
+                }
+                displayName+=", ${city.country}" //Concat country code
+                cityName.text = displayName
                 longitude.text=city.coord.lon.toString()
                 latitude.text=city.coord.lat.toString()
             }

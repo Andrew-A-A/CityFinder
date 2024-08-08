@@ -1,10 +1,12 @@
 package com.andrewsaba.cityfinder.main
 
 import android.os.Bundle
+import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import com.andrewsaba.cityfinder.R
 import com.andrewsaba.cityfinder.adapter.CitiesListAdapter
@@ -15,6 +17,8 @@ class MainActivity : AppCompatActivity() {
 
     // View model object
     private lateinit var viewModel: MainViewModel
+
+
 
     // Binding object
     private lateinit var binding: ActivityMainBinding
@@ -36,12 +40,20 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         //Cities list initalization (UI)
-        if (viewModel.isDataLoaded)
          binding.citiesList.adapter=viewModel.getCitiesListAdapter()
 
         //Set observer for search result
         viewModel.searchResults.observe(this) { results ->
             displaySearchResults(results)
+        }
+
+        val searchEditText=findViewById<EditText>(R.id.search_input_text)
+        searchEditText.doOnTextChanged { text, _, _, _ ->
+            if (!text.isNullOrEmpty()) {
+                viewModel.searchCitiesByPrefix(text.toString())
+            }else{
+                binding.citiesList.adapter=viewModel.getCitiesListAdapter()
+            }
         }
     }
     // Display search results in the UI (if any)
