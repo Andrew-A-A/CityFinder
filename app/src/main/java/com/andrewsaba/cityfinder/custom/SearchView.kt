@@ -17,10 +17,13 @@ class SearchView(context: Context, attrs: AttributeSet) : FrameLayout(context, a
 
     var binding: ViewSearchBinding =
         ViewSearchBinding.inflate(LayoutInflater.from(context),this,true)
+
     init {
         binding.openSearchButton.setOnClickListener { openSearch() }
         binding.closeSearchButton.setOnClickListener { closeSearch() }
         binding.executeSearchButton.setOnClickListener{executeSearch()}
+
+        //Set search edit text box action listener to execute search on enter
         binding.searchInputText.setOnEditorActionListener { _, actionId, keyEvent ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE ||
                 keyEvent == null ||
@@ -51,9 +54,7 @@ class SearchView(context: Context, attrs: AttributeSet) : FrameLayout(context, a
         }
     }
 
-
     private fun openSearch() {
-        //binding.searchInputText.text.clear()
         binding.searchOpenView.visibility = View.VISIBLE
         val circularReveal = ViewAnimationUtils.createCircularReveal(
             binding.searchOpenView,
@@ -66,7 +67,6 @@ class SearchView(context: Context, attrs: AttributeSet) : FrameLayout(context, a
         binding.searchInputText.requestFocus()
         showKeyboard(binding.searchInputText)
     }
-
 
     private fun closeSearch() {
         collapseSearch()
@@ -90,7 +90,6 @@ class SearchView(context: Context, attrs: AttributeSet) : FrameLayout(context, a
             override fun onAnimationStart(animation: Animator) = Unit
             override fun onAnimationEnd(animation: Animator) {
                 binding.searchOpenView.visibility = INVISIBLE
-
                 circularConceal.removeAllListeners()
             }
         })

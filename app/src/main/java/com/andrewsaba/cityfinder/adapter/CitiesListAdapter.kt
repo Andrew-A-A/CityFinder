@@ -31,7 +31,6 @@ RecyclerView.Adapter<CitiesListAdapter.Companion.ViewHolder>() {
             private val cityName: TextView =view.findViewById(R.id.city_name)
             private val longitude: TextView =view.findViewById(R.id.long_val)
             private val latitude: TextView =view.findViewById(R.id.lat_val)
-
             //Bind data to views
             fun bind(city: City){
                 var displayName= city.name.replaceFirstChar {
@@ -39,7 +38,7 @@ RecyclerView.Adapter<CitiesListAdapter.Companion.ViewHolder>() {
                         Locale.getDefault()
                     ) else it.toString()
                 }
-                displayName+=", ${city.country}" //Concat country code
+                displayName+=", ${city.country}" //Concatenate country code
                 cityName.text = displayName
                 longitude.text=city.coord.lon.toString()
                 latitude.text=city.coord.lat.toString()
